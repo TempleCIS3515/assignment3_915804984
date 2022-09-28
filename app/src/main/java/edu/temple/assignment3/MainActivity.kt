@@ -4,7 +4,6 @@ import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
-import android.widget.ArrayAdapter
 import android.widget.Spinner
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -26,7 +25,7 @@ class MainActivity : AppCompatActivity() {
         colorSpinner = findViewById(R.id.colorSpinner)
         layout = findViewById(R.id.layout)
 
-        val arrayAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, colors)
+        val arrayAdapter = ColorAdapter(this@MainActivity, colors)
         colorSpinner.adapter = arrayAdapter
 
         //adding the listener to spinner
