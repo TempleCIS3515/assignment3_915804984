@@ -4,7 +4,9 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/Karl Morris/AndroidStudioProjects/Assignment3/app/src/main/res/layout/activity_main.xml" value="0.55" />
+        <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.113" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.18229166666666666" />
+        <entry key="app/src/main/res/layout/layout_spinner.xml" value="0.1" />
       </map>
     </option>
   </component>
