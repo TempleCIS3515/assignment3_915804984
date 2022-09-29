@@ -4,8 +4,8 @@ import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import android.widget.Spinner
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 
 class MainActivity : AppCompatActivity() {
@@ -18,30 +18,73 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val colors = arrayOf(
-                "Choose a color", "Red", "Yellow", "Blue", "Green", "Gray",
-                "Orange", "Black", "Pink", "Purple"
+            MyColorDataClass(
+            "Choose a color",
+            ""
+            ),
+            MyColorDataClass(
+                "Blue",
+                "#0000FF"
+            ),
+            MyColorDataClass(
+                "Teal",
+                "#FF018786"
+            ),
+            MyColorDataClass(
+                "Purple",
+                "#FF3700B3"
+            ),
+            MyColorDataClass(
+                "Light Purple",
+                "#FFBB86FC"
+            ),
+            MyColorDataClass(
+                "Green",
+                "#00FF00"
+            ),
+            MyColorDataClass(
+                "Red",
+                "#FF0000"
+            ),
+            MyColorDataClass(
+                "Yellow",
+                "#FFFF00"
+            ),
+            MyColorDataClass(
+                "Light Teal",
+                "#FF03DAC5"
+            ),
+            MyColorDataClass(
+                "Gray",
+                "#555555"
+            ),
+            MyColorDataClass(
+                "Pink",
+                "#FFC0CB"
+            ),
+            MyColorDataClass(
+                "Orange",
+                "#FFA500"
+            ),
+
         )
         // Bind views
         colorSpinner = findViewById(R.id.colorSpinner)
         layout = findViewById(R.id.layout)
 
-        val arrayAdapter = ColorAdapter(this@MainActivity, colors)
-        colorSpinner.adapter = arrayAdapter
+        colorSpinner.adapter = ColorAdapter(this,colors)
 
         //adding the listener to spinner
         colorSpinner.onItemSelectedListener = object: AdapterView.  OnItemSelectedListener{
             override fun onItemSelected(adapterView: AdapterView<*>, view: View?, i: Int, l: Long) {
-                if (i !=0) //first index of 0 is not a color
+                if (i != 0) //first index of 0 is not a color
                 {
-                    val colorTextView = adapterView.findViewById<TextView>(R.id.color_text_view)
-                    colorTextView.setBackgroundColor(Color.WHITE)
-
-                    layout.setBackgroundColor(Color.parseColor(colors[i]))
+                    //view?.setBackgroundColor(Color.parseColor(adapterView!!.getItemAtPosition(i).toString()))
                 }
-            }
 
+            }
             override fun onNothingSelected(adapterView: AdapterView<*>) {
             }
         }
     }
-}
+    }

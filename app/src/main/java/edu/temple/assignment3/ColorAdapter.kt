@@ -8,59 +8,53 @@ import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.TextView
 
-class ColorAdapter(mainActivity: MainActivity, colors: Array<String>): BaseAdapter () {
-    private val colors: Array<String>
-    private var inflater: LayoutInflater? = null
-    private val context: Context
+class ColorAdapter(_context: Context, _colors: Array<MyColorDataClass>) : BaseAdapter() {
+
+    private val context = _context
+    private val colors = _colors
 
     override fun getCount(): Int {
         return colors.size
     }
 
-    override fun getItem(i: Int): Any {
-        return i
+    override fun getItem(position: Int): Any {
+        return colors[position]
     }
 
-    override fun getItemId(i: Int): Long {
-        return i.toLong()
+    override fun getItemId(position: Int): Long {
+        return position.toLong()
     }
 
-    //holder class is to hold items in spinner, only textview in spinner
-    class Holder {
-        var colorTextView: TextView? = null
-    }
+    override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
+        val textView : TextView
 
-    override fun getView(i: Int, convertView: View, viewGroup: ViewGroup?): View {
-        var myView = convertView
-        val holder: Holder
-
-        //initialize spinner
-        if (myView == null) {
-            inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-            myView = inflater!!.inflate(R.layout.layout_spinner, null)
-
-            myView.setBackgroundColor(Color.WHITE)
-            holder = Holder()
-            holder.colorTextView = myView.findViewById(R.id.color_text_view)
-            myView.tag = holder
+        if (convertView != null) {
+            textView = convertView as TextView
         } else {
-            //if spinner initialized already
-            holder = myView.tag as Holder
+            textView = TextView(context)
+            textView.textSize = 22f
+            textView.setPadding(5, 10, 0, 10)
         }
 
-        //set text in spinner text view
-        holder.colorTextView!!.text = colors[i]
+        textView.text = colors[position]._colorName
 
-        //set color of background of textview in spinner
-        if (i != 0)
-            holder.colorTextView!!.setBackgroundColor(Color.parseColor(colors[i]))
-        //return view
-        return myView
+        if (position == 0) //first index of 0 is not a color
+        {
+            //val colorTextView = adapterView.findViewById<TextView>(R.id.color_text_view)
+            textView.setBackgroundColor(Color.WHITE)
+
+            //textView.setBackgroundColor(Color.parseColor(colors[position]))
+        }
+        else {
+            textView.setBackgroundColor(Color.parseColor(colors[position]._colorCode))
+        }
+        return textView
     }
 
-    init {
-        context = MainActivity()
-        this.colors = colors
+    override fun getDropDownView(position: Int, convertView: View?, parent: ViewGroup?): View {
+        return super.getDropDownView(position, convertView, parent)
+//            .apply {setBackgroundColor(Color.parseColor("white"))
+//        }
     }
+
 }
-
